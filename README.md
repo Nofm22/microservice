@@ -1,18 +1,11 @@
-## Installation
-
-```bash
-$ npm install
-```
-
 ## Running the app
 
 ```bash
 # run docker-compose
 $ docker-compose up -d
 
-# run auth service
-$ npm run start:dev auth
+# http://localhost:5000
+# http://localhost:5000/auth -> GET
+# http://localhost:500/auth -> POST
 
-# run api service
-$ npm run start:dev api
 ```

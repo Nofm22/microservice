@@ -1,6 +1,6 @@
-import { Controller, Get, Inject } from '@nestjs/common';
+import { Controller, Get, Inject, Post } from '@nestjs/common';
 import { AppService } from './app.service';
-import { ClientProxy } from '@nestjs/microservices';
+import { ClientProxy, EventPattern } from '@nestjs/microservices';
 
 @Controller()
 export class AppController {
@@ -9,13 +9,30 @@ export class AppController {
     @Inject('AUTH_SERVICE') private authService: ClientProxy,
   ) {}
 
-  @Get()
+  @Post('auth')
+  postUser() {
+    try {
+      return this.authService.send(
+        {
+          cmd: 'post-user',
+        },
+        {},
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  @Get('auth')
   getUSer() {
-    return this.authService.send(
-      {
-        cmd: 'get-user',
-      },
-      {},
-    );
+    try {
+      return this.authService.send(
+        {
+          cmd: 'get-user',
+        },
+        {},
+      );
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
